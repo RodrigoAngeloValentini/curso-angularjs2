@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="myPizza">
-<head>
-  <meta charset="UTF-8">
-  <title>Angular</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="js/angular.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers/myPizzaCtrl.js"></script>
-</head>
-<body>
-  <section class="container" ng-controller="myPizzaCtrl">
+<header ng-include="'view/nav.html'"></header>
+
+<section class="container">
+
     <div class="row">
-      <h1 ng-bind="name" class="text-center"></h1>
-    </div>
-    <div class="row">
+        <h3 ng-bind="bonus"></h3>
+        <alert-msg title="Alert:" ng-show="msg">
+            {{ msg }}
+        </alert-msg>
         <div class="form-inline text-center">
             <div class="form-group pull-left">
                 <input type="search" ng-model="search" class="form-control" placeholder="Search">
@@ -40,35 +33,26 @@
         </div>
     </div>
     <div class="row">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th ng-click="orderBy('name');" style="cursor: pointer">Name</th>
-            <th ng-click="orderBy('tel');" style="cursor: pointer">Telefone</th>
-            <th ng-click="orderBy('address');" style="cursor: pointer">Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="client in clients | filter:search | orderBy:order:reverse">
-            <td>{{client.name}}</td>
-            <td>{{client.tel}}</td>
-            <td>{{client.address}}</td>
-            <td>
-                <button class="btn btn-default" ng-click="edit(client)">Edit</button>
-                <button class="btn btn-danger" ng-click="destroy(client)">Destroy</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th ng-click="orderBy('name');" style="cursor: pointer">Name</th>
+                <th ng-click="orderBy('tel');" style="cursor: pointer">Telefone</th>
+                <th ng-click="orderBy('address');" style="cursor: pointer">Address</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="client in clients | filter:search | orderBy:order:reverse">
+                <td><a href="#/client/{{ client.id }}">{{client.name | uppercase}}</a></td>
+                <td>{{client.tel}}</td>
+                <td>{{client.address | lowercase}}</td>
+                <td>
+                    <button class="btn btn-default" ng-click="edit(client)">Edit</button>
+                    <button class="btn btn-danger" ng-click="destroy(client)">Destroy</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-  </section>
-  <footer>
-      <div class="row">
-          <div class="col-xs-12 text-center">
-            <small>MyPizza/2016</small>
-          </div>
-      </div>
-  </footer>
-</body>
-</html>
+</section>
