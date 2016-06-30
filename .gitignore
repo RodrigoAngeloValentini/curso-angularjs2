@@ -1,3 +1,4 @@
 .idea/
 angularjs-avancado/node_modules/
-nodemodules/
+nodemodules/*
+angularjs2-iniciando/node_modules/
